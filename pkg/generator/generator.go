@@ -6,28 +6,44 @@ import (
 	"io"
 	"os"
 	"path"
+	"text/template"
 
+	"github.com/andrespd99/rocket-cli/pkg/templates"
 	"github.com/andrespd99/rocket-cli/pkg/types"
 )
 
-type generator struct{}
+type Generator interface {
+	Generate(tmpl templates.Template) error
+	GenerateAt(tmpl templates.Template, dst string) error
+}
+
+type generator struct {
+}
 
 func NewGenerator() *generator {
 	return &generator{}
 }
 
-func (g *generator) Generate(tmpl io.Reader) error {
-	return g.generateAt(tmpl, "./")
+// Generate generates the given tmpl files in the root directory.
+func (g *generator) Generate(tmpl templates.Template) error {
+	return g.generate(tmpl, "./")
 }
 
-func (g *generator) GenerateAt(tmpl io.Reader, dst string) error {
-	return g.generateAt(tmpl, dst)
+// GenerateAt generates the given tmpl files at dst
+func (g *generator) GenerateAt(tmpl templates.Template, dst string) error {
+	return g.generate(tmpl, dst)
 }
 
-func (g *generator) generateAt(tmpl io.Reader, root string) error {
+func (g *generator) generate(tmpl templates.Template, root string) error {
 	buf := bytes.Buffer{}
 
-	_, err := io.Copy(&buf, tmpl)
+	r, err := tmpl.Open()
+	if err != nil {
+		return err
+	}
+	defer r.Close()
+
+	_, err = io.Copy(&buf, r)
 	if err != nil {
 		return err
 	}
@@ -38,19 +54,30 @@ func (g *generator) generateAt(tmpl io.Reader, root string) error {
 	if err != nil {
 		return err
 	}
+
 	for _, b := range bundle {
 		data, err := base64.StdEncoding.DecodeString(b.Content)
 		if err != nil {
 			return err
 		}
+		dst := path.Clean(path.Join(root, b.Path))
 
-		dst := path.Clean(root + b.Path)
-
-		if err := os.MkdirAll(path.Join(path.Dir(dst)), 0755); err != nil && !os.IsExist(err) {
+		err = os.MkdirAll(path.Dir(dst), 0755)
+		if err != nil && !os.IsExist(err) {
 			return err
 		}
 
-		err = os.WriteFile(dst, data, 0755)
+		file, err := os.Create(dst)
+		if err != nil {
+			return err
+		}
+
+		t, err := template.New("").Parse(string(data))
+		if err != nil {
+			return err
+		}
+
+		err = t.Execute(file, tmpl.Data)
 		if err != nil {
 			os.Remove(dst)
 			return err

@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/andrespd99/rocket-cli/pkg/generator"
+	"github.com/andrespd99/rocket-cli/pkg/app"
 	tmpl "github.com/andrespd99/rocket-cli/pkg/templates"
 )
 
@@ -13,18 +13,13 @@ type ProjectData struct {
 }
 
 func main() {
-	g := generator.NewGenerator()
-	fileReader, err := tmpl.TestTemplate.Open()
-	if err != nil {
-		log.Fatalln(err)
-	}
-	defer fileReader.Close()
+	app := app.NewApp()
 
 	// TODO: ADD PATH FLAGGY !
 
 	dst := "test/"
 
-	err = g.GenerateAt(fileReader, dst)
+	err := app.G.GenerateAt(tmpl.TestTemplate, dst)
 	if err != nil {
 		log.Fatalln(err)
 	}

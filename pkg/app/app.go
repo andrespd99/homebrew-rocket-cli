@@ -1,12 +1,15 @@
 package app
 
 import (
-	"io"
-
-	"github.com/andrespd99/rocket-cli/pkg/common"
+	"github.com/andrespd99/rocket-cli/pkg/generator"
 )
 
 type App struct {
-	*common.Common
-	closers []io.Closer
+	G generator.Generator
+}
+
+func NewApp() *App {
+	return &App{
+		G: generator.NewGenerator(),
+	}
 }

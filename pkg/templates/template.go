@@ -7,11 +7,12 @@ import (
 
 const tmplPath = "./templates"
 
-type template struct {
+type Template struct {
 	Path string
+	Data any
 }
 
-func (s template) Open() (io.ReadCloser, error) {
+func (s Template) Open() (io.ReadCloser, error) {
 	f, err := os.Open(s.Path)
 	if err != nil {
 		return nil, err

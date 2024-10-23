@@ -121,7 +121,7 @@ func cleanPaths(src string, entries []fileEntry) []fileEntry {
 
 func showHelp() {
 	fmt.Println("Usage: encoder <src> <out-dir> [arguments]")
-	fmt.Println("<src> 				   source directory to be encoded")
-	fmt.Println("<out-dir> 			   output directory (defaults to .output/)")
-	fmt.Println("--fileName 		   name of the output file")
+	fmt.Println("<src>			source directory to be encoded")
+	fmt.Println("<out-dir>		output directory (defaults to .output/)")
+	fmt.Println("--fileName		name of the output file")
 }

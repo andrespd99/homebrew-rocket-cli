@@ -6,7 +6,6 @@ import (
 	"io"
 	"os"
 	"path"
-	"text/template"
 
 	"github.com/andrespd99/rocket-cli/pkg/templates"
 	"github.com/andrespd99/rocket-cli/pkg/types"
@@ -72,12 +71,7 @@ func (g *generator) generate(tmpl templates.Template, root string) error {
 			return err
 		}
 
-		t, err := template.New("").Parse(string(data))
-		if err != nil {
-			return err
-		}
-
-		err = t.Execute(file, tmpl.Data)
+		err = tmpl.Execute(string(data), file)
 		if err != nil {
 			os.Remove(dst)
 			return err

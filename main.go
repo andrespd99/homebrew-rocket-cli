@@ -17,7 +17,7 @@ func main() {
 
 	// TODO: ADD PATH FLAGGY !
 
-	dst := "test/"
+	dst := ".test/"
 
 	err := app.G.GenerateAt(tmpl.TestTemplate, dst)
 	if err != nil {

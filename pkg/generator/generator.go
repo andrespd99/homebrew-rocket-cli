@@ -81,7 +81,7 @@ func (g *generator) generate(bprint blueprints.Blueprint, root string) error {
 			return err
 		}
 
-		if !shouldApplyTemplate(file) {
+		if shouldIgnore(file) {
 			continue
 		}
 
@@ -95,11 +95,11 @@ func (g *generator) generate(bprint blueprints.Blueprint, root string) error {
 	return nil
 }
 
-func shouldApplyTemplate(file *os.File) bool {
+func shouldIgnore(file *os.File) bool {
 	for _, ext := range ignoredExtensions {
 		if strings.HasSuffix(file.Name(), ext) {
-			return false
+			return true
 		}
 	}
-	return true
+	return false
 }

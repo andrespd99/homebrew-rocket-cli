@@ -88,7 +88,7 @@ func (g *generator) generate(bprint blueprints.Blueprint, root string) error {
 		err = bprint.Execute(string(data), file)
 		if err != nil {
 			// os.Remove(dst)
-			return fmt.Errorf("error when creating file %%: %s", b.Path, err.Error())
+			return fmt.Errorf("error when creating file %s: %s", b.Path, err.Error())
 		}
 	}
 

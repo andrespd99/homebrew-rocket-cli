@@ -1,8 +1,6 @@
 package main
 
-import (
-	"log"
-)
+import "fmt"
 
 type ProjectData struct {
 	ProjectName string
@@ -16,7 +14,7 @@ func main() {
 	// dst := ".test/"
 
 	if err := ServeCommand(); err != nil {
-		log.Fatalln(err)
+		fmt.Println(err)
 	}
 
 	// bp, err := blueprints.NewFlutterAppBlueprint(blueprints.BaseFlutterAppParams{

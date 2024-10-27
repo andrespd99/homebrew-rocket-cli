@@ -20,8 +20,8 @@ const (
 
 	baseFlutterAppJsonPath = "base.json"
 
-	defaultOrgName     = "com.example"
-	defaultDescription = "\"A Flutter project accelerated by Rocket CLI 🚀\""
+	DefaultOrgName     = "com.example"
+	DefaultDescription = "\"A Flutter project accelerated by Rocket CLI 🚀\""
 )
 
 var blueprintPaths = map[string]string{
@@ -36,7 +36,7 @@ var blueprintPaths = map[string]string{
 
 var (
 	platforms        = []string{ios, android, web, macos, linux, windows, fuchsia}
-	defaultPlatforms = []string{ios, android}
+	DefaultPlatforms = []string{ios, android}
 )
 
 type BaseFlutterAppParams struct {
@@ -61,7 +61,7 @@ func flutterAppBlueprints(data BaseFlutterAppParams) ([]blueprint.Blueprint, err
 	data.Name = converters.ToSnakeCase(data.Name)
 
 	if data.OrgName == "" {
-		data.OrgName = defaultOrgName
+		data.OrgName = DefaultOrgName
 	}
 
 	if data.AppId == "" {
@@ -73,11 +73,11 @@ func flutterAppBlueprints(data BaseFlutterAppParams) ([]blueprint.Blueprint, err
 	}
 
 	if data.Description == "" {
-		data.Description = defaultDescription
+		data.Description = DefaultDescription
 	}
 
 	if len(data.Platforms) == 0 {
-		data.Platforms = defaultPlatforms
+		data.Platforms = DefaultPlatforms
 	}
 
 	// TODO: DEFINE AND PASS

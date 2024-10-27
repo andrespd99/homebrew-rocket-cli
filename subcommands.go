@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"os"
 
 	"github.com/andrespd99/rocket-cli/pkg/blueprint/blueprints"
@@ -15,10 +14,10 @@ var flutterAppSubcmd *flaggy.Subcommand
 
 var nameVar string
 var appIdFlag string
-var orgNameFlag string
 var displayNameFlag string
-var descriptionFlag string
-var platformsFlag string
+var orgNameFlag = blueprints.DefaultOrgName
+var descriptionFlag = blueprints.DefaultDescription
+var platformsFlag = blueprints.DefaultPlatforms
 
 func init() {
 	flaggy.SetName("🚀 Rocket")
@@ -29,10 +28,8 @@ func init() {
 	createSubcmd = flaggy.NewSubcommand("create")
 	flutterAppSubcmd = flaggy.NewSubcommand("flutter_app")
 
-	createSubcmd.AddPositionalValue(&nameVar, "name", 1, true, "Package name")
-
 	createSubcmd.AttachSubcommand(flutterAppSubcmd, 1)
-
+	flutterAppSubcmd.AddPositionalValue(&nameVar, "name", 1, true, "Package name")
 	flaggy.AttachSubcommand(createSubcmd, 1)
 
 	// TODO: Improve
@@ -42,7 +39,7 @@ func init() {
 	createSubcmd.String(&orgNameFlag, "org", "org-name", "Package name")
 	createSubcmd.String(&displayNameFlag, "a", "disp-name", "Display name or label displayed on devices")
 	createSubcmd.String(&descriptionFlag, "d", "desc", "Used in pubspec.yaml description and README overview")
-	createSubcmd.String(&platformsFlag, "p", "platforms", "Target platforms")
+	createSubcmd.StringSlice(&platformsFlag, "p", "platforms", "Target platforms")
 
 	// Set the version and parse all inputs into variables.
 	var version string
@@ -62,18 +59,22 @@ func ServeCommand() error {
 	if createSubcmd.Used {
 		if flutterAppSubcmd.Used {
 			bp, err := blueprints.NewFlutterAppBlueprint(blueprints.BaseFlutterAppParams{
-				Name: nameVar,
+				Name:        nameVar,
+				AppId:       appIdFlag,
+				OrgName:     orgNameFlag,
+				DisplayName: displayNameFlag,
+				Description: descriptionFlag,
+				Platforms:   platformsFlag,
 			})
 			if err != nil {
-				log.Fatalln(err)
+				return err
 			}
 
 			g := generator.NewGenerator()
-			g.Generate(bp)
+
+			g.GenerateAt(bp, nameVar)
 		}
 	}
-
-	flaggy.ShowHelp("")
 
 	return nil
 }

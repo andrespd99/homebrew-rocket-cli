@@ -1,4 +1,4 @@
-package blueprints
+package converters
 
 import "testing"
 
@@ -15,7 +15,7 @@ func TestToSnakeCase(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			ans := toSnakeCase(tt.input)
+			ans := ToSnakeCase(tt.input)
 			if ans != tt.want {
 				t.Errorf("got %s, want %s", ans, tt.want)
 			}
@@ -37,7 +37,7 @@ func TestToCamelCase(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			ans := toCamelCase(tt.input)
+			ans := ToCamelCase(tt.input)
 			if ans != tt.want {
 				t.Errorf("got %s, want %s", ans, tt.want)
 			}
@@ -59,7 +59,7 @@ func TestToPascalCase(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			ans := toPascalCase(tt.input)
+			ans := ToPascalCase(tt.input)
 			if ans != tt.want {
 				t.Errorf("got %s, want %s", ans, tt.want)
 			}
@@ -81,7 +81,7 @@ func TestToTitleCase(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			ans := toTitleCase(tt.input)
+			ans := ToTitleCase(tt.input)
 			if ans != tt.want {
 				t.Errorf("got %s, want %s", ans, tt.want)
 			}

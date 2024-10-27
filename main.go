@@ -4,8 +4,7 @@ import (
 	"log"
 
 	"github.com/andrespd99/rocket-cli/pkg/app"
-	"github.com/andrespd99/rocket-cli/pkg/blueprints"
-	tmpl "github.com/andrespd99/rocket-cli/pkg/blueprints"
+	"github.com/andrespd99/rocket-cli/pkg/blueprint/blueprints"
 )
 
 type ProjectData struct {
@@ -20,7 +19,7 @@ func main() {
 
 	dst := ".test/"
 
-	bp, err := blueprints.NewFlutterAppBlueprint(tmpl.BaseFlutterAppData{
+	bp, err := blueprints.NewFlutterAppBlueprint(blueprints.BaseFlutterAppParams{
 		Name:    "avila_tek_app",
 		OrgName: "com.avilatek",
 	})

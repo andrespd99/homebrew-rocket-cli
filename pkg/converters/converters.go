@@ -1,4 +1,4 @@
-package blueprints
+package converters
 
 import (
 	"strings"
@@ -8,7 +8,7 @@ import (
 // TODO: Improve string converers...
 
 // Function to convert a string to snake_case
-func toSnakeCase(str string) string {
+func ToSnakeCase(str string) string {
 	var snake string
 	for _, r := range str {
 		if unicode.IsSpace(r) || unicode.Is(unicode.Hyphen, r) {
@@ -21,7 +21,7 @@ func toSnakeCase(str string) string {
 }
 
 // Function to convert a string to camelCase
-func toCamelCase(str string) string {
+func ToCamelCase(str string) string {
 	str = strings.ToLower(str)
 	r := strings.NewReplacer("-", " ", "_", " ")
 	str = r.Replace(str)
@@ -36,7 +36,7 @@ func toCamelCase(str string) string {
 	return strings.Join(parts, "")
 }
 
-func toPascalCase(str string) string {
+func ToPascalCase(str string) string {
 	r := strings.NewReplacer("-", " ", "_", " ")
 	str = r.Replace(str)
 
@@ -47,7 +47,7 @@ func toPascalCase(str string) string {
 	return strings.Join(parts, "")
 }
 
-func toTitleCase(str string) string {
+func ToTitleCase(str string) string {
 	r := strings.NewReplacer("-", " ", "_", " ")
 	str = r.Replace(str)
 

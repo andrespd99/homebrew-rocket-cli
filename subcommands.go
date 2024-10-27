@@ -28,18 +28,19 @@ func init() {
 	createSubcmd = flaggy.NewSubcommand("create")
 	flutterAppSubcmd = flaggy.NewSubcommand("flutter_app")
 
-	createSubcmd.AttachSubcommand(flutterAppSubcmd, 1)
-	flutterAppSubcmd.AddPositionalValue(&nameVar, "name", 1, true, "Package name")
-	flaggy.AttachSubcommand(createSubcmd, 1)
-
 	// TODO: Improve
 	createSubcmd.Description = "Creates a project directory based on a pre-defined template"
+	flutterAppSubcmd.Description = "Creates a Flutter project"
 
-	createSubcmd.String(&appIdFlag, "id", "app-id", "Reverse DNS identifier. Usually the Bundle ID (iOS) or Application ID (Android)")
-	createSubcmd.String(&orgNameFlag, "org", "org-name", "Package name")
-	createSubcmd.String(&displayNameFlag, "a", "disp-name", "Display name or label displayed on devices")
-	createSubcmd.String(&descriptionFlag, "d", "desc", "Used in pubspec.yaml description and README overview")
-	createSubcmd.StringSlice(&platformsFlag, "p", "platforms", "Target platforms")
+	flutterAppSubcmd.AddPositionalValue(&nameVar, "name", 1, true, "Package name")
+	flutterAppSubcmd.String(&appIdFlag, "id", "app-id", "Reverse DNS identifier. Usually the Bundle ID (iOS) or Application ID (Android)")
+	flutterAppSubcmd.String(&orgNameFlag, "org", "org-name", "Package name")
+	flutterAppSubcmd.String(&displayNameFlag, "a", "disp-name", "Display name or label displayed on devices")
+	flutterAppSubcmd.String(&descriptionFlag, "d", "desc", "Used in pubspec.yaml description and README overview")
+	flutterAppSubcmd.StringSlice(&platformsFlag, "p", "platforms", "Target platforms")
+
+	createSubcmd.AttachSubcommand(flutterAppSubcmd, 1)
+	flaggy.AttachSubcommand(createSubcmd, 1)
 
 	// Set the version and parse all inputs into variables.
 	var version string

@@ -40,12 +40,12 @@ var (
 )
 
 type BaseFlutterAppParams struct {
-	// Organization name used in AppId
-	OrgName string `json:"org-name"`
-	// Reverse DNS name. Usually the Bundle ID (iOS) or Application ID (Android)
-	AppId string `json:"app-id"`
 	// Flutter package name
 	Name string `json:"name"`
+	// Reverse DNS name. Usually the Bundle ID (iOS) or Application ID (Android)
+	AppId string `json:"app-id"`
+	// Organization name used in AppId
+	OrgName string `json:"org-name"`
 	// Name displayed on device app menus
 	DisplayName string `json:"app-name"`
 	// Used on pubspec.yaml description field and README overview.

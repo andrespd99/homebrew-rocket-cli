@@ -2,9 +2,6 @@ package main
 
 import (
 	"log"
-
-	"github.com/andrespd99/rocket-cli/pkg/app"
-	"github.com/andrespd99/rocket-cli/pkg/blueprint/blueprints"
 )
 
 type ProjectData struct {
@@ -13,21 +10,23 @@ type ProjectData struct {
 }
 
 func main() {
-	app := app.NewApp()
 
 	// TODO: ADD PATH FLAGGY !
 
-	dst := ".test/"
+	// dst := ".test/"
 
-	bp, err := blueprints.NewFlutterAppBlueprint(blueprints.BaseFlutterAppParams{
-		Name:    "avila_tek_app",
-		OrgName: "com.avilatek",
-	})
-	if err != nil {
+	if err := ServeCommand(); err != nil {
 		log.Fatalln(err)
 	}
 
-	if err = app.G.GenerateAt(bp, dst); err != nil {
-		log.Fatalln(err)
-	}
+	// bp, err := blueprints.NewFlutterAppBlueprint(blueprints.BaseFlutterAppParams{
+	// 	Name:    "avila_tek_app",
+	// 	OrgName: "com.avilatek",
+	// })
+	// if err != nil {
+	// }
+
+	// if err = app.G.GenerateAt(bp, dst); err != nil {
+	// 	log.Fatalln(err)
+	// }
 }

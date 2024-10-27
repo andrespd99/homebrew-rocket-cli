@@ -5,8 +5,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/andrespd99/rocket-cli/pkg/blueprint"
-	"github.com/andrespd99/rocket-cli/pkg/converters"
+	"github.com/andrespd99/rocket/pkg/blueprint"
+	"github.com/andrespd99/rocket/pkg/converters"
 )
 
 const (

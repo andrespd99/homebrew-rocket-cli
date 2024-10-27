@@ -1,6 +1,6 @@
 package blueprints
 
-import "github.com/andrespd99/rocket-cli/pkg/blueprint"
+import "github.com/andrespd99/rocket/pkg/blueprint"
 
 const jsonsPath = "./pkg/blueprint/blueprints/jsons"
 

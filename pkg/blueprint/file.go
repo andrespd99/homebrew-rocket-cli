@@ -8,7 +8,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/andrespd99/rocket-cli/pkg/converters"
+	"github.com/andrespd99/rocket/pkg/converters"
 )
 
 type Bundle []File

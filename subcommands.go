@@ -3,8 +3,8 @@ package main
 import (
 	"os"
 
-	"github.com/andrespd99/rocket-cli/pkg/blueprint/blueprints"
-	"github.com/andrespd99/rocket-cli/pkg/generator"
+	"github.com/andrespd99/rocket/pkg/blueprint/blueprints"
+	"github.com/andrespd99/rocket/pkg/generator"
 	"github.com/integrii/flaggy"
 )
 
@@ -20,9 +20,9 @@ var descriptionFlag = blueprints.DefaultDescription
 var platformsFlag = blueprints.DefaultPlatforms
 
 func init() {
-	flaggy.SetName("🚀 Rocket")
+	flaggy.SetName("rocket")
 	// TODO: Improve this mediocre description lmao
-	flaggy.SetDescription("Accelerate your Flutter project with out-of-the-box and production-ready setup")
+	flaggy.SetDescription("🚀 Rocket accelerates your Flutter project with out-of-the-box and production-ready code structure and configurations")
 
 	// Create any subcommands and set their parameters.
 	createSubcmd = flaggy.NewSubcommand("create")
@@ -74,8 +74,14 @@ func ServeCommand() error {
 			g := generator.NewGenerator()
 
 			g.GenerateAt(bp, nameVar)
-		}
-	}
 
+			return nil
+		}
+
+		flaggy.ShowHelp("")
+
+		return nil
+	}
+	flaggy.ShowHelp("")
 	return nil
 }

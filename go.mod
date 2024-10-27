@@ -1,4 +1,4 @@
-module github.com/andrespd99/rocket-cli
+module github.com/andrespd99/rocket
 
 go 1.22.4
 

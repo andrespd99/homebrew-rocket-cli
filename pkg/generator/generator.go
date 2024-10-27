@@ -1,6 +1,6 @@
 package generator
 
-import "github.com/andrespd99/rocket-cli/pkg/blueprint"
+import "github.com/andrespd99/rocket/pkg/blueprint"
 
 type (
 	generator struct{}
